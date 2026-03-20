@@ -1,5 +1,5 @@
 // ==== Config ====
-const AIO_KEY = "aio_fXix81ZN13qJi9BVkduww3MRzvaz"; // Replace with your Adafruit IO key
+const AIO_KEY = "aio_IQOq92ii7HzNLFfaAorv4C6JbbsF"; // Replace with your Adafruit IO key
 const FEED = "Mainuddin/feeds/meter";   // Your feed
 
 const clientID = "dashboard-" + Math.floor(Math.random() * 1000);
