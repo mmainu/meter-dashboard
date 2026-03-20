@@ -1,34 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Voltage Monitor</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Meter Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!--  Paho MQTT library (browser-ready) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+    <!-- Your JS -->
+    <script src="app.js" defer></script>
 </head>
-
 <body>
+    <h1>Meter Dashboard</h1>
 
-<div class="main-box">
+    <div id="dashboard">
+        <div class="box" id="l1">
+            <div class="label">L1</div>
+            <div class="value">-- V</div>
+        </div>
+        <div class="box" id="l2">
+            <div class="label">L2</div>
+            <div class="value">-- V</div>
+        </div>
+        <div class="box" id="l3">
+            <div class="label">L3</div>
+            <div class="value">-- V</div>
+        </div>
+    </div>
 
-<h1>Voltage Monitor</h1>
-
-<div class="row">
-  <div class="box" id="box1">
-    <h2>L1</h2>
-    <p id="l1">--</p>
-  </div>
-
-  <div class="box" id="box2">
-    <h2>L2</h2>
-    <p id="l2">--</p>
-  </div>
-
-  <div class="box" id="box3">
-    <h2>L3</h2>
-    <p id="l3">--</p>
-  </div>
-</div>
-
-<script src="script.js"></script>
+    <div id="status">Connecting...</div>
 </body>
 </html>
