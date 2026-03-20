@@ -1,0 +1,87 @@
+/* ----------- GLOBAL FIX ----------- */
+* {
+  box-sizing: border-box;   /* 🔥 prevents shifting issues */
+}
+
+/* ----------- BODY ----------- */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0f172a;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* ----------- MAIN BOX ----------- */
+.main-box {
+  background: #1e293b;
+  padding: 30px;
+  border-radius: 20px;
+  width: 380px;              /* fixed width for symmetry */
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+}
+
+/* ----------- TITLE ----------- */
+h1 {
+  margin-bottom: 5px;
+}
+
+/* ----------- STATUS ----------- */
+#status {
+  font-size: 0.9rem;
+  color: #38bdf8;
+  margin-bottom: 20px;
+}
+
+/* ----------- VERTICAL CONTAINER ----------- */
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;   /* 🔥 FIX: centers boxes perfectly */
+}
+
+/* ----------- PHASE BOX ----------- */
+.box {
+  width: 100%;
+  max-width: 300px;      /* 🔥 FIX: prevents right shift */
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  background: #2563eb;
+  transition: 0.3s;
+}
+
+/* Hover effect */
+.box:hover {
+  transform: scale(1.03);
+}
+
+/* ----------- TEXT ----------- */
+.box h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.box p {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* ----------- STATUS COLORS ----------- */
+.normal {
+  background: #22c55e;   /* green */
+}
+
+.low {
+  background: #f59e0b;   /* yellow */
+}
+
+.high {
+  background: #ef4444;   /* red */
+}
