@@ -1,6 +1,6 @@
 // 🔹 Adafruit IO credentials
 const username = "Mainuddin";
-const aioKey = "test";
+const aioKey = "aio_BPKs38skLh4Zq0699HZUtMj6mFHv";
 
 // 🔹 MQTT connection (WebSocket)
 const client = mqtt.connect("wss://io.adafruit.com/mqtt/", {
