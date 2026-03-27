@@ -2,76 +2,81 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f1f1f1;
-    text-align: center;
-    padding: 40px;
     margin: 0;
+    padding: 15px;
+    text-align: center;
 }
 
 /* ===== TITLE ===== */
 h1 {
     color: #333;
-    margin-bottom: 20px;
+    font-size: 22px;
+    margin-bottom: 15px;
 }
 
-/* ===== DASHBOARD LAYOUT ===== */
+/* ===== DASHBOARD ===== */
 #dashboard {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
-/* ===== COMMON BOX STYLE ===== */
+/* ===== BOX ===== */
 .box {
-    width: 280px;
-    padding: 15px 20px;
-    background: #4CAF50;
-    color: white;
-    border-radius: 10px;
+    width: 100%;              /* FULL WIDTH */
+    max-width: 400px;         /* limit for large screens */
+    margin: auto;
+    padding: 18px;
+    border-radius: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    color: white;
     font-size: 18px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* ===== LABEL ===== */
-.box span:first-child {
     font-weight: bold;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* ===== VALUE ===== */
-.box .value {
-    font-weight: normal;
+/* ===== COLORS ===== */
+#l1, #l2, #l3 {
+    background: #4CAF50;
 }
 
-/* ===== CURRENT COLOR ===== */
 #i1, #i2, #i3 {
-    background: #2196F3; /* Blue */
+    background: #2196F3;
 }
 
-/* ===== POWER COLOR ===== */
 .power {
-    background: #FF5722; /* Orange/Red */
-    font-weight: bold;
+    background: #FF5722;
+}
+
+/* ===== VALUE TEXT ===== */
+.value {
+    font-size: 20px;
 }
 
 /* ===== STATUS ===== */
 #status {
-    margin-top: 25px;
-    font-size: 18px;
+    margin-top: 20px;
+    font-size: 16px;
     color: #555;
 }
 
-/* ===== ERROR STATE ===== */
-.error {
-    background: #f44336 !important; /* Red */
-}
+/* ===== MOBILE BOOST ===== */
+@media (max-width: 480px) {
 
-/* ===== RESPONSIVE (optional) ===== */
-@media (max-width: 500px) {
+    h1 {
+        font-size: 20px;
+    }
+
     .box {
-        width: 90%;
         font-size: 16px;
+        padding: 16px;
+    }
+
+    .value {
+        font-size: 18px;
     }
 }
