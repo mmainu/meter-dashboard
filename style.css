@@ -78,8 +78,11 @@ h1 {
 
 /* ===== STATUS ===== */
 #status {
-    position: absolute;
-    bottom: 20px;
+    position: fixed;
+    bottom: 60px;   /* 👈 move above mobile buttons */
+    left: 50%;
+    transform: translateX(-50%);
+    
     font-size: 16px;
     color: #555;
 }
