@@ -1,6 +1,6 @@
 let client = null;
 
-// ===== START =====
+// START
 function startDashboard() {
     const serial = document.getElementById("serialInput").value.trim();
 
@@ -9,15 +9,13 @@ function startDashboard() {
         return;
     }
 
-    localStorage.setItem("meter_serial", serial);
-
     document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("app").style.display = "block";
+    document.getElementById("app").style.display = "flex";
 
     startMQTT(serial);
 }
 
-// ===== MQTT START =====
+// MQTT
 function startMQTT(serial) {
 
     let AIO_KEY = localStorage.getItem("aio_key");
@@ -37,9 +35,9 @@ function startMQTT(serial) {
         "client-" + Math.random()
     );
 
-    client.onMessageArrived = function (message) {
+    client.onMessageArrived = function (msg) {
         try {
-            const d = JSON.parse(message.payloadString);
+            const d = JSON.parse(msg.payloadString);
 
             document.querySelector("#l1 .value").textContent = d.l1 + " V";
             document.querySelector("#l2 .value").textContent = d.l2 + " V";
@@ -52,7 +50,7 @@ function startMQTT(serial) {
             document.querySelector("#pt .value").textContent = d.pt + " kW";
 
         } catch (e) {
-            console.log("JSON error:", message.payloadString);
+            console.log("JSON error:", msg.payloadString);
         }
     };
 
@@ -63,29 +61,24 @@ function startMQTT(serial) {
 
         onSuccess: function () {
             document.getElementById("status").textContent =
-                "Connected ✅ (Meter " + serial + ")";
-
+                "Connected ✅ (" + serial + ")";
             client.subscribe(FEED);
         },
 
-        onFailure: function (e) {
+        onFailure: function () {
             document.getElementById("status").textContent = "Connection Failed ❌";
-            console.log(e);
         }
     });
 }
 
-// ===== BACK BUTTON FIX =====
+// BACK BUTTON
 function goBack() {
-
-    // Disconnect MQTT properly
     if (client && client.isConnected()) {
         client.disconnect();
     }
 
-    // Reset UI values
-    document.querySelectorAll(".value").forEach(el => el.textContent = "--");
-
     document.getElementById("app").style.display = "none";
     document.getElementById("loginScreen").style.display = "flex";
+
+    document.querySelectorAll(".value").forEach(v => v.textContent = "--");
 }

@@ -1,99 +1,87 @@
-/* ===== RESET ===== */
+/* RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ===== LOCK SCREEN ===== */
+/* LOCK SCREEN */
 html, body {
     height: 100%;
     width: 100%;
-    overflow: hidden;              /* 🔥 no scrolling */
-    touch-action: none;            /* 🔥 disable touch move */
-    overscroll-behavior: none;     /* 🔥 no bounce */
-
+    overflow: hidden;
+    touch-action: none;
+    overscroll-behavior: none;
     font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
+    background: #f1f1f1;
 }
 
-/* ===== LOGIN SCREEN ===== */
+/* LOGIN */
 #loginScreen {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    inset: 0;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;  /* vertical center */
-    align-items: center;      /* horizontal center */
+    justify-content: center;
+    align-items: center;
     gap: 15px;
 }
 
-/* INPUT */
 #serialInput {
     padding: 12px;
     font-size: 16px;
     width: 220px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
 }
 
-/* BUTTON */
 #loginScreen button {
     padding: 12px 20px;
-    font-size: 16px;
     background: #4CAF50;
     color: white;
     border: none;
     border-radius: 6px;
 }
 
-/* ===== DASHBOARD SCREEN ===== */
+/* APP CENTER */
 #app {
     position: fixed;
     inset: 0;
 
     display: flex;
-    justify-content: center;   /* horizontal center */
-    align-items: center;       /* vertical center */
+    justify-content: center;
+    align-items: center;
 }
 
-/* ===== BACK BUTTON ===== */
-#backBtn {
-    position: fixed;
-
-    bottom: calc(15px + env(safe-area-inset-bottom)); /* 🔥 key fix */
-    left: 50%;
-    transform: translateX(-50%);
-
-    width: 90%;
+/* MAIN CONTAINER */
+#container {
+    width: 100%;
     max-width: 380px;
 
-    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    background: #333;
-    color: white;
-    border: none;
-    border-radius: 8px;
+    gap: 12px;
 
-    z-index: 9999;
+    padding: 0 12px;
+    padding-bottom: 100px; /* space for back button */
 }
-/* ===== TITLE ===== */
+
+/* TITLE */
 h1 {
     font-size: 20px;
     color: #333;
-    text-align: center;
 }
 
-/* ===== DASHBOARD ===== */
+/* DASHBOARD */
 #dashboard {
-    width: 100%;       /* take full container width */
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
-/* ===== BOX ===== */
+
+/* BOX */
 .box {
     width: 100%;
     padding: 16px;
@@ -104,7 +92,10 @@ h1 {
     justify-content: space-between;
     align-items: center;
 
-    box-sizing: border-box;   /* 🔥 prevents right shift */
+    color: white;
+    font-weight: bold;
+
+    box-sizing: border-box;
 }
 
 /* COLORS */
@@ -117,39 +108,29 @@ h1 {
     font-size: 18px;
 }
 
-/* ===== STATUS ===== */
+/* STATUS */
 #status {
     font-size: 14px;
     color: #555;
-    margin-top: 5px;
 }
 
-/* ===== MOBILE FINE TUNE ===== */
-@media (max-width: 480px) {
-    #dashboard {
-        width: 90%;
-    }
+/* BACK BUTTON (SAFE AREA FIX) */
+#backBtn {
+    position: fixed;
+    bottom: calc(15px + env(safe-area-inset-bottom));
+    left: 50%;
+    transform: translateX(-50%);
 
-    .box {
-        padding: 16px;
-        font-size: 15px;
-    }
-}
-
-#container {
-    width: 100%;
+    width: 90%;
     max-width: 380px;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 12px;
+    font-size: 16px;
 
-    gap: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
 
-    padding: 0 12px;   /* 🔥 equal left-right spacing */
-    box-sizing: border-box;
-}
-
-#container {
-    padding-bottom: 90px; /* 🔥 prevents overlap */
+    z-index: 9999;
 }
