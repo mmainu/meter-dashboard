@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <style>
-    html, body {
-    overscroll-behavior: none;
-    }
-    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Meter Dashboard</title>
@@ -16,26 +11,53 @@
 </head>
 <body>
 
-<h1>Meter Dashboard</h1>
+<!-- ===== SCREEN 1 ===== -->
+<div id="loginScreen">
+    <h2>Enter Meter Serial Number</h2>
 
-<div id="dashboard">
+    <input type="text" id="serialInput" placeholder="e.g. 1001">
 
-    <!-- Voltage -->
-    <div class="box" id="l1"><span>L1 Voltage</span><span class="value">-- V</span></div>
-    <div class="box" id="l2"><span>L2 Voltage</span><span class="value">-- V</span></div>
-    <div class="box" id="l3"><span>L3 Voltage</span><span class="value">-- V</span></div>
+    <button onclick="startDashboard()">Connect</button>
+</div>
 
-    <!-- Current -->
-    <div class="box" id="i1"><span>L1 Current</span><span class="value">-- A</span></div>
-    <div class="box" id="i2"><span>L2 Current</span><span class="value">-- A</span></div>
-    <div class="box" id="i3"><span>L3 Current</span><span class="value">-- A</span></div>
+<!-- ===== SCREEN 2 ===== -->
+<div id="app" style="display:none;">
 
-    <!-- Total Power -->
-    <div class="box power" id="pt"><span>Total Power</span><span class="value">-- kW</span></div>
+    <button id="backBtn" onclick="goBack()">⬅ Back</button>
+
+    <h1>Meter Dashboard</h1>
+
+    <div id="dashboard">
+        <div class="box" id="l1"><span>L1 Voltage</span><span class="value">--</span></div>
+        <div class="box" id="l2"><span>L2 Voltage</span><span class="value">--</span></div>
+        <div class="box" id="l3"><span>L3 Voltage</span><span class="value">--</span></div>
+
+        <div class="box" id="i1"><span>L1 Current</span><span class="value">--</span></div>
+        <div class="box" id="i2"><span>L2 Current</span><span class="value">--</span></div>
+        <div class="box" id="i3"><span>L3 Current</span><span class="value">--</span></div>
+
+        <div class="box power" id="pt"><span>Total Power</span><span class="value">--</span></div>
+    </div>
+
+    <div id="status">Connecting...</div>
 
 </div>
 
-<div id="status">Connecting...</div>
-
 </body>
 </html>
+
+<div id="app" style="display:none;">
+
+    <button id="backBtn" onclick="goBack()">⬅ Back</button>
+
+    <div id="container">
+        <h1>Meter Dashboard</h1>
+
+        <div id="dashboard">
+            <!-- boxes -->
+        </div>
+
+        <div id="status">Connecting...</div>
+    </div>
+
+</div>

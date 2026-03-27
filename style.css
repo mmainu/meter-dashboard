@@ -5,89 +5,155 @@
     box-sizing: border-box;
 }
 
-/* ===== FULL SCREEN BODY ===== */
+/* ===== LOCK SCREEN ===== */
 html, body {
     height: 100%;
-    overflow: hidden; /* 🔥 disable scroll */
+    width: 100%;
+    overflow: hidden;              /* 🔥 no scrolling */
+    touch-action: none;            /* 🔥 disable touch move */
+    overscroll-behavior: none;     /* 🔥 no bounce */
+
     font-family: Arial, sans-serif;
     background-color: #f1f1f1;
 }
 
-/* ===== MAIN CENTER WRAPPER ===== */
-body {
+/* ===== LOGIN SCREEN ===== */
+#loginScreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
     display: flex;
-    justify-content: center;   /* horizontal center */
-    align-items: center;       /* vertical center */
+    flex-direction: column;
+    justify-content: center;  /* vertical center */
+    align-items: center;      /* horizontal center */
+    gap: 15px;
 }
 
-/* ===== CONTAINER ===== */
+/* INPUT */
+#serialInput {
+    padding: 12px;
+    font-size: 16px;
+    width: 220px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* BUTTON */
+#loginScreen button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+/* ===== DASHBOARD SCREEN ===== */
+#app {
+    position: fixed;   /* 🔥 better than absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;   /* center horizontally */
+    align-items: center;       /* center vertically */
+}
+
+/* ===== BACK BUTTON ===== */
+#backBtn {
+    position: fixed;
+    bottom: 15px;           /* 🔥 bottom placement */
+    left: 50%;
+    transform: translateX(-50%);  /* center horizontally */
+
+    width: 90%;
+    max-width: 380px;
+
+    padding: 12px;
+    font-size: 16px;
+
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+
+    z-index: 1000;
+}
+/* ===== TITLE ===== */
+h1 {
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* ===== DASHBOARD ===== */
 #dashboard {
     width: 100%;
-    max-width: 420px;
+    max-width: 400px;
 
     display: flex;
     flex-direction: column;
     gap: 12px;
 
-    padding: 15px;
+    padding: 0 12px;   /* 🔥 left-right spacing */
 }
-
-/* ===== TITLE ===== */
-h1 {
-    position: absolute;
-    top: 20px;
-    font-size: 22px;
-    color: #333;
-}
-
 /* ===== BOX ===== */
 .box {
-    width: 100%;
-    padding: 18px;
+    width: 100%;           /* full width inside container */
+    max-width: 100%;       /* prevent overflow */
 
-    border-radius: 14px;
+    padding: 16px;
+    border-radius: 12px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    font-size: 18px;
-    font-weight: bold;
     color: white;
-
-    box-shadow: 0 5px 12px rgba(0,0,0,0.15);
+    font-weight: bold;
 }
 
-/* ===== COLORS ===== */
-#l1, #l2, #l3 {
-    background: #4CAF50;
-}
+/* COLORS */
+#l1, #l2, #l3 { background: #4CAF50; }
+#i1, #i2, #i3 { background: #2196F3; }
+.power { background: #FF5722; }
 
-#i1, #i2, #i3 {
-    background: #2196F3;
-}
-
-.power {
-    background: #FF5722;
-}
-
-/* ===== VALUE ===== */
+/* VALUE */
 .value {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 /* ===== STATUS ===== */
 #status {
-    position: fixed;
-    bottom: 60px;   /* 👈 move above mobile buttons */
-    left: 50%;
-    transform: translateX(-50%);
-    
-    font-size: 16px;
+    font-size: 14px;
     color: #555;
+    margin-top: 5px;
 }
 
-/* ===== TOUCH FIX ===== */
-body {
-    touch-action: none; /* 🔥 prevent movement */
+/* ===== MOBILE FINE TUNE ===== */
+@media (max-width: 480px) {
+    #dashboard {
+        width: 90%;
+    }
+
+    .box {
+        padding: 16px;
+        font-size: 15px;
+    }
+}
+
+#container {
+    width: 100%;
+    max-width: 380px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    padding: 0 10px;   /* 🔥 side spacing */
+    padding-bottom: 70px; /* keep for back button */
 }
