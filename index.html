@@ -5,29 +5,31 @@
     <title>Meter Dashboard</title>
     <link rel="stylesheet" href="style.css">
 
-    <!--  Paho MQTT library (browser-ready) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
-    <!-- Your JS -->
     <script src="app.js" defer></script>
 </head>
 <body>
-    <h1>Meter Dashboard</h1>
 
-    <div id="dashboard">
-        <div class="box" id="l1">
-            <div class="label">L1</div>
-            <div class="value">-- V</div>
-        </div>
-        <div class="box" id="l2">
-            <div class="label">L2</div>
-            <div class="value">-- V</div>
-        </div>
-        <div class="box" id="l3">
-            <div class="label">L3</div>
-            <div class="value">-- V</div>
-        </div>
-    </div>
+<h1>Meter Dashboard</h1>
 
-    <div id="status">Connecting...</div>
+<div id="dashboard">
+
+    <!-- Voltage -->
+    <div class="box" id="l1"><span>L1 Voltage</span><span class="value">-- V</span></div>
+    <div class="box" id="l2"><span>L2 Voltage</span><span class="value">-- V</span></div>
+    <div class="box" id="l3"><span>L3 Voltage</span><span class="value">-- V</span></div>
+
+    <!-- Current -->
+    <div class="box" id="i1"><span>L1 Current</span><span class="value">-- A</span></div>
+    <div class="box" id="i2"><span>L2 Current</span><span class="value">-- A</span></div>
+    <div class="box" id="i3"><span>L3 Current</span><span class="value">-- A</span></div>
+
+    <!-- Total Power -->
+    <div class="box power" id="pt"><span>Total Power</span><span class="value">-- kW</span></div>
+
+</div>
+
+<div id="status">Connecting...</div>
+
 </body>
 </html>

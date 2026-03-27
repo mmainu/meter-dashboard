@@ -1,47 +1,45 @@
-// ==== USER INPUT (SAFE) ====
+// ==== USER INPUT ====
 let AIO_KEY = localStorage.getItem("aio_key");
 
 if (!AIO_KEY) {
     AIO_KEY = prompt("Enter your Adafruit IO Key:");
-    if (AIO_KEY) {
-        localStorage.setItem("aio_key", AIO_KEY);
-    } else {
-        alert("AIO Key required!");
-    }
+    localStorage.setItem("aio_key", AIO_KEY);
 }
 
 // ==== CONFIG ====
 const USERNAME = "Mainuddin";
 const FEED = "Mainuddin/feeds/meter";
 
-const clientID = "dashboard-" + Math.floor(Math.random() * 1000);
-const broker = "io.adafruit.com";
-const port = 443;
+const client = new Paho.MQTT.Client(
+    "io.adafruit.com",
+    443,
+    "/mqtt",
+    "client-" + Math.random()
+);
 
-// ==== INIT CLIENT ====
-const client = new Paho.MQTT.Client(broker, port, "/mqtt", clientID);
+// ==== HELPER (handle -1 values) ====
+function formatValue(val, unit) {
+    if (val === -1 || val === undefined) return "Error";
+    return val + " " + unit;
+}
 
-// ==== CALLBACKS ====
-client.onConnectionLost = function (responseObject) {
-    document.getElementById("status").textContent = "Connection Lost ❌";
-    console.log("Connection lost:", responseObject.errorMessage);
-};
-
+// ==== MESSAGE HANDLER ====
 client.onMessageArrived = function (message) {
     try {
-        const data = JSON.parse(message.payloadString);
+        const d = JSON.parse(message.payloadString);
 
-        if (data.l1 !== undefined)
-            document.querySelector("#l1 .value").textContent = data.l1 + " V";
+        document.querySelector("#l1 .value").textContent = formatValue(d.l1, "V");
+        document.querySelector("#l2 .value").textContent = formatValue(d.l2, "V");
+        document.querySelector("#l3 .value").textContent = formatValue(d.l3, "V");
 
-        if (data.l2 !== undefined)
-            document.querySelector("#l2 .value").textContent = data.l2 + " V";
+        document.querySelector("#i1 .value").textContent = formatValue(d.i1, "A");
+        document.querySelector("#i2 .value").textContent = formatValue(d.i2, "A");
+        document.querySelector("#i3 .value").textContent = formatValue(d.i3, "A");
 
-        if (data.l3 !== undefined)
-            document.querySelector("#l3 .value").textContent = data.l3 + " V";
+        document.querySelector("#pt .value").textContent = formatValue(d.pt, "kW");
 
     } catch (e) {
-        console.error("JSON Error:", message.payloadString);
+        console.log("JSON Error:", message.payloadString);
     }
 };
 
@@ -58,6 +56,6 @@ client.connect({
 
     onFailure: function (e) {
         document.getElementById("status").textContent = "Connection Failed ❌";
-        console.log("Connect failed:", e);
+        console.log(e);
     }
 });
