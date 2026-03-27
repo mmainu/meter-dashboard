@@ -47,7 +47,7 @@ function startMQTT(serial) {
             document.querySelector("#i2 .value").textContent = d.i2 + " A";
             document.querySelector("#i3 .value").textContent = d.i3 + " A";
 
-            document.querySelector("#pt .value").textContent = d.pt + " kW";
+            document.querySelector("#pf .value").textContent = d.pf ;
 
         } catch (e) {
             console.log("JSON error:", msg.payloadString);
