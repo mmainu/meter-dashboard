@@ -110,13 +110,13 @@ function onMessageArrived(msg) {
 
     let d = JSON.parse(msg.payloadString);
 
-    if (d.l1) document.getElementById("l1").textContent = d.l1 + " V";
-    if (d.l2) document.getElementById("l2").textContent = d.l2 + " V";
-    if (d.l3) document.getElementById("l3").textContent = d.l3 + " V";
+     document.querySelector("#l1 .value").textContent = d.l1 + " V";
+    document.querySelector("#l2 .value").textContent = d.l2 + " V";
+    document.querySelector("#l3 .value").textContent = d.l3 + " V";
 
-    if (d.i1) document.getElementById("i1").textContent = d.i1 + " A";
-    if (d.i2) document.getElementById("i2").textContent = d.i2 + " A";
-    if (d.i3) document.getElementById("i3").textContent = d.i3 + " A";
+    document.querySelector("#i1 .value").textContent = d.i1 + " A";
+    document.querySelector("#i2 .value").textContent = d.i2 + " A";
+    document.querySelector("#i3 .value").textContent = d.i3 + " A";
 
-    if (d.pf) document.getElementById("pf").textContent = d.pf;
+    document.querySelector("#pf .value").textContent = d.pf ;
 }
