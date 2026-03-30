@@ -1,136 +1,165 @@
-/* RESET */
+/* ===== RESET ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* LOCK SCREEN */
 html, body {
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+
     height: 100%;
     width: 100%;
-    overflow: hidden;
-    touch-action: none;
+
+    overflow: hidden;                 /* 🔥 prevent movement */
     overscroll-behavior: none;
-    font-family: Arial, sans-serif;
-    background: #f1f1f1;
+    touch-action: manipulation;       /* 🔥 stop drag shifting */
 }
 
-/* LOGIN */
-#loginScreen {
-    position: fixed;
-    inset: 0;
+/* ===== SCREEN ===== */
+.screen {
+    display: none;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
-
-#serialInput {
-    padding: 12px;
-    font-size: 16px;
-    width: 220px;
-}
-
-#loginScreen button {
-    padding: 12px 20px;
-    background: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 6px;
-}
-
-/* APP CENTER */
-#app {
-    position: fixed;
-    inset: 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* MAIN CONTAINER */
-#container {
+    height: 100vh;
     width: 100%;
-    max-width: 380px;
+
+    padding: 20px;
 
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-
-    gap: 12px;
-
-    padding: 0 12px;
-    padding-bottom: 100px; /* space for back button */
 }
 
-/* TITLE */
-h1 {
-    font-size: 20px;
+/* ===== HEADINGS ===== */
+h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* ===== INPUT ===== */
+input {
+    width: 90%;
+    max-width: 320px;
+
+    padding: 14px;
+    margin: 10px;
+
+    border-radius: 10px;
+    border: 1px solid #ccc;
+
+    text-align: center;
+    font-size: 16px;
+}
+
+/* ===== BUTTON ===== */
+button {
+    width: 90%;
+    max-width: 320px;
+
+    padding: 14px;
+    margin: 8px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, #4CAF50, #2ecc71);
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* ===== BUTTON PRESS EFFECT ===== */
+button:active {
+    transform: scale(0.97);
+}
+
+/* ===== BACK BUTTON (PERFECT CENTER FIX) ===== */
+.backBtn {
+    position: fixed;
+
+    bottom: 20px;
+    left: 0;
+    right: 0;
+
+    margin: 0 auto;              /* center */
+    width: calc(100% - 40px);   /* equal side spacing */
+    max-width: 320px;
+
+    display: block;
+
+    /* NEW COLOR (distinct) */
+    background: linear-gradient(135deg, #ff9800, #f57c00);  /* orange */
+    color: white;
+
+    border-radius: 10px;
+}
+/* ===== CONFIG ITEMS ===== */
+.configItem {
+    width: 90%;
+    max-width: 320px;
+
+    background: #ffffff;
     color: #333;
+
+    padding: 12px;
+    margin: 6px;
+
+    border-radius: 8px;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* DASHBOARD */
+/* ===== DASHBOARD ===== */
 #dashboard {
     width: 100%;
+    max-width: 360px;
+
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    align-items: center;
 }
 
-/* BOX */
+/* ===== DATA BOX ===== */
 .box {
     width: 100%;
-    padding: 16px;
 
-    border-radius: 12px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+
+    padding: 14px;
+    margin: 6px 0;
+
+    border-radius: 10px;
 
     display: flex;
     justify-content: space-between;
-    align-items: center;
 
-    color: white;
-    font-weight: bold;
+    font-size: 1.1rem;
 
-    box-sizing: border-box;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }
 
-/* COLORS */
-#l1, #l2, #l3 { background: #4CAF50; }
-#i1, #i2, #i3 { background: #2196F3; }
-.power { background: #FF5722; }
-
-/* VALUE */
-.value {
-    font-size: 18px;
-}
-
-/* STATUS */
+/* ===== STATUS ===== */
 #status {
-    font-size: 14px;
-    color: #555;
-}
-
-/* BACK BUTTON (SAFE AREA FIX) */
-#backBtn {
     position: fixed;
-    bottom: calc(15px + env(safe-area-inset-bottom));
+
+    bottom: 70px;   /* 🔥 above nav bar */
     left: 50%;
+
     transform: translateX(-50%);
 
-    width: 90%;
-    max-width: 380px;
+    background: white;
+    color: #333;
 
-    padding: 12px;
-    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 20px;
 
-    background: #333;
-    color: white;
-    border: none;
-    border-radius: 8px;
+    font-size: 14px;
 
-    z-index: 9999;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }

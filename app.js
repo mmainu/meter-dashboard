@@ -1,84 +1,122 @@
-let client = null;
+let client;
+let serial = "";
+let config = {};
 
-// START
-function startDashboard() {
-    const serial = document.getElementById("serialInput").value.trim();
+// ===== INIT =====
+window.onload = function () {
+    showScreen("loginScreen");
+};
+
+// ===== SCREEN CONTROL =====
+function showScreen(id) {
+    document.querySelectorAll(".screen").forEach(s => s.style.display = "none");
+    document.getElementById(id).style.display = "flex";
+}
+
+// ===== LOGIN =====
+function goToSelection() {
+
+    serial = document.getElementById("serialInput").value.trim();
 
     if (!serial) {
-        alert("Enter Serial Number");
+        alert("Enter Serial");
         return;
     }
 
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("app").style.display = "flex";
-
-    startMQTT(serial);
+    showScreen("selectionScreen");
 }
 
-// MQTT
-function startMQTT(serial) {
+// ===== NAVIGATION =====
+function openConfig() {
+    showScreen("configScreen");
+}
 
-    let AIO_KEY = localStorage.getItem("aio_key");
+function openDashboard() {
 
-    if (!AIO_KEY) {
-        AIO_KEY = prompt("Enter Adafruit IO Key:");
-        localStorage.setItem("aio_key", AIO_KEY);
+    showScreen("dashboardScreen");
+
+    connectMQTT(() => {
+        subscribeData();
+    });
+}
+
+function goBack(from) {
+
+    if (from === "selection") showScreen("loginScreen");
+    if (from === "config" || from === "dashboard") showScreen("selectionScreen");
+}
+
+// ===== CONFIG =====
+function editParam(p) {
+    let val = prompt("Enter register for " + p);
+    if (val) {
+        config[p] = parseInt(val);
+        document.getElementById(p + "_reg").textContent = val;
     }
+}
 
-    const USERNAME = "Mainuddin";
-    const FEED = USERNAME + "/feeds/meter_" + serial;
+function saveConfig() {
+
+    connectMQTT(() => {
+
+        const topic = `Mainuddin/feeds/meter_${serial}_config`;
+        client.send(topic, JSON.stringify(config));
+
+        alert("Config Sent");
+
+        showScreen("selectionScreen");
+    });
+}
+
+// ===== MQTT =====
+function connectMQTT(callback) {
+
+    let key = localStorage.getItem("aio_key");
+
+    if (!key) {
+        key = prompt("Enter AIO Key");
+        localStorage.setItem("aio_key", key);
+    }
 
     client = new Paho.MQTT.Client(
         "io.adafruit.com",
         443,
         "/mqtt",
-        "client-" + Math.random()
+        "web-" + Math.random()
     );
 
-    client.onMessageArrived = function (msg) {
-        try {
-            const d = JSON.parse(msg.payloadString);
-
-            document.querySelector("#l1 .value").textContent = d.l1 + " V";
-            document.querySelector("#l2 .value").textContent = d.l2 + " V";
-            document.querySelector("#l3 .value").textContent = d.l3 + " V";
-
-            document.querySelector("#i1 .value").textContent = d.i1 + " A";
-            document.querySelector("#i2 .value").textContent = d.i2 + " A";
-            document.querySelector("#i3 .value").textContent = d.i3 + " A";
-
-            document.querySelector("#pf .value").textContent = d.pf ;
-
-        } catch (e) {
-            console.log("JSON error:", msg.payloadString);
-        }
-    };
+    client.onMessageArrived = onMessageArrived;
 
     client.connect({
         useSSL: true,
-        userName: USERNAME,
-        password: AIO_KEY,
+        userName: "Mainuddin",
+        password: key,
 
         onSuccess: function () {
-            document.getElementById("status").textContent =
-                "Connected ✅ (" + serial + ")";
-            client.subscribe(FEED);
-        },
-
-        onFailure: function () {
-            document.getElementById("status").textContent = "Connection Failed ❌";
+            document.getElementById("status").textContent = "Connected ✅";
+            callback();
         }
     });
 }
 
-// BACK BUTTON
-function goBack() {
-    if (client && client.isConnected()) {
-        client.disconnect();
-    }
+// ===== SUBSCRIBE =====
+function subscribeData() {
+    const topic = `Mainuddin/feeds/meter_${serial}`;
+    client.subscribe(topic);
+}
 
-    document.getElementById("app").style.display = "none";
-    document.getElementById("loginScreen").style.display = "flex";
+// ===== DATA =====
+function onMessageArrived(msg) {
 
-    document.querySelectorAll(".value").forEach(v => v.textContent = "--");
+    let d = JSON.parse(msg.payloadString);
+
+    if (d.l1) document.getElementById("l1").textContent = d.l1 + " V";
+    if (d.l2) document.getElementById("l2").textContent = d.l2 + " V";
+    if (d.l3) document.getElementById("l3").textContent = d.l3 + " V";
+
+    if (d.i1) document.getElementById("i1").textContent = d.i1 + " A";
+    if (d.i2) document.getElementById("i2").textContent = d.i2 + " A";
+    if (d.i3) document.getElementById("i3").textContent = d.i3 + " A";
+
+    if (d.pf) document.getElementById("pf").textContent = d.pf;
 }
