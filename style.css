@@ -25,6 +25,7 @@ html, body {
     width: 100%;
 
     padding: 20px;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));  /* 🔥 FIX */
 
     display: flex;
     flex-direction: column;
@@ -82,21 +83,16 @@ button:active {
 .backBtn {
     position: fixed;
 
-    bottom: 20px;
+    bottom: calc(20px + env(safe-area-inset-bottom));  /* 🔥 KEY FIX */
+
     left: 0;
     right: 0;
+    margin: 0 auto;
 
-    margin: 0 auto;              /* center */
-    width: calc(100% - 40px);   /* equal side spacing */
+    width: calc(100% - 40px);
     max-width: 320px;
 
-    display: block;
-
-    /* NEW COLOR (distinct) */
-    background: linear-gradient(135deg, #ff9800, #f57c00);  /* orange */
-    color: white;
-
-    border-radius: 10px;
+    background: linear-gradient(135deg, #ff9800, #f57c00);
 }
 /* ===== CONFIG ITEMS ===== */
 .configItem {
@@ -148,18 +144,17 @@ button:active {
 #status {
     position: fixed;
 
-    bottom: 70px;   /* 🔥 above nav bar */
-    left: 50%;
+    bottom: calc(90px + env(safe-area-inset-bottom)); /* 🔥 ABOVE BACK BUTTON */
 
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+
+    width: fit-content;
 
     background: white;
-    color: #333;
-
     padding: 8px 16px;
     border-radius: 20px;
-
-    font-size: 14px;
 
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
