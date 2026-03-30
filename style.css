@@ -41,7 +41,7 @@ h2 {
 
 /* ===== INPUT ===== */
 input {
-    width: 90%;
+    width: 95%;
     max-width: 320px;
 
     padding: 14px;
@@ -56,7 +56,7 @@ input {
 
 /* ===== BUTTON ===== */
 button {
-    width: 90%;
+    width: 95%;
     max-width: 320px;
 
     padding: 14px;
@@ -81,7 +81,7 @@ button:active {
 
 /* ===== BACK BUTTON (PERFECT CENTER FIX) ===== */
 .backBtn {
-    width: 90%;
+    width: 95%;
     max-width: 320px;
 
     margin-bottom: 20px;   /* 🔥 safe spacing */
@@ -90,7 +90,7 @@ button:active {
 }
 /* ===== CONFIG ITEMS ===== */
 .configItem {
-    width: 90%;
+    width: 95%;
     max-width: 320px;
 
     background: #ffffff;
@@ -116,7 +116,7 @@ button:active {
 
 /* ===== DATA BOX ===== */
 .box {
-    width: 90%;
+    width: 95%;
 
     background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
