@@ -17,22 +17,22 @@ html, body {
     touch-action: manipulation;       /* 🔥 stop drag shifting */
 }
 
-/* ===== SCREEN ===== */
+/* ===== SCREEN FIX ===== */
 .screen {
     display: none;
 
-    height: 100vh;
+    height: 100dvh;          /* 🔥 FIX (modern browsers) */
+    min-height: 100vh;       /* fallback */
+
     width: 100%;
 
-    padding: 20px;
-    padding-bottom: calc(80px + env(safe-area-inset-bottom));  /* 🔥 FIX */
+    padding: 20px 20px 100px 20px;  /* 🔥 bottom space */
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-
 /* ===== HEADINGS ===== */
 h2 {
     color: #2c3e50;
@@ -81,16 +81,10 @@ button:active {
 
 /* ===== BACK BUTTON (PERFECT CENTER FIX) ===== */
 .backBtn {
-    position: fixed;
-
-    bottom: calc(20px + env(safe-area-inset-bottom));  /* 🔥 KEY FIX */
-
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-
-    width: calc(100% - 40px);
+    width: 90%;
     max-width: 320px;
+
+    margin-bottom: 20px;   /* 🔥 safe spacing */
 
     background: linear-gradient(135deg, #ff9800, #f57c00);
 }
@@ -122,7 +116,7 @@ button:active {
 
 /* ===== DATA BOX ===== */
 .box {
-    width: 100%;
+    width: 90%;
 
     background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
@@ -130,7 +124,7 @@ button:active {
     padding: 14px;
     margin: 6px 0;
 
-    border-radius: 10px;
+    border-radius: 8px;
 
     display: flex;
     justify-content: space-between;
@@ -140,21 +134,12 @@ button:active {
     box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }
 
-/* ===== STATUS ===== */
+/* ===== STATUS (INLINE, STABLE) ===== */
 #status {
     position: fixed;
 
-    bottom: calc(90px + env(safe-area-inset-bottom)); /* 🔥 ABOVE BACK BUTTON */
+    bottom: 70px;
 
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-
-    width: fit-content;
-
-    background: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    left: 50%;
+    transform: translateX(-50%);
 }
